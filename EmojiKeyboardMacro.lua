@@ -1,13 +1,13 @@
 -- get luamacros here: http://www.hidmacros.eu/
 -- plug in your 2nd keyboard, load this script into LUAmacros, and press the triangle PLAY button.
 -- Then, press any key on that keyboard to assign logical name ('EMOJIKEYBOARDDEVICE') to macro keyboard
---lmc_assign_keyboard('EMOJIKEYBOARDDEVICE');
+lmc_assign_keyboard('EMOJIKEYBOARDDEVICE');
 
 --The better solution: comment out the line above and uncomment the line below, replacing 'KEYBOARDIDREGEX' with the ID of your keyboard.
 --The ID of your desired keyboard can be found by running the script once, then checking the output of LuaMacros and seeing which ID corresponded with the name 'EMOJIKEYBOARDDEVICE'
-lmc_device_set_name('MACROS','F7150D6')
+--lmc_device_set_name('EMOJIKEYBOARDDEVICE','KEYBOARDIDREGEX')
 
---lmc_print_devices()
+lmc_print_devices()
 
 lmc.minimizeToTray = true;
 lmc_minimize() --code responsible for minimizing LuaMacros into the taskbar

@@ -217,4 +217,5 @@ pip-log.txt
 *.exe
 *.dll
 *.xpl
-*.txt
+EmojiListSaved.txt
+KeyPressed.txt
