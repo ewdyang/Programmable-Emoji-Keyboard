@@ -35,7 +35,7 @@ Enter/Backspace: These two keys function (mostly) normally, so you can use them 
 Configuration:
 The text file "EmojiListSaved.txt" contains all the emoji associations that you have programmed while using the script.
 You can manually edit this to add emoji to your keyboard if you wish.
-The formatting is as follows:
+The formatting is as follows: (FORMATTING IS BROKEN ON GITHUB, DOWNLOAD AND OPEN TO SEE CORRECT FORMAT)
 a	😁
 b	😜
 c	🌰
