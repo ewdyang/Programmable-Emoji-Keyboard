@@ -9,7 +9,7 @@ Run, LuaMacros.exe EmojiKeyboardMacro.lua -r ;runs LuaMacros with the appropriat
 
 global emojiList := {}
 
-emojiList := loadArray("EmojiListSaved.txt") ;Loads associations from file into array 'emojiList'
+emojiList := readArray("EmojiListSaved.txt") ;Loads associations from file into array 'emojiList'
 
 MsgBox Emoji Keyboard Initialized.
 
@@ -20,11 +20,11 @@ MsgBox Emoji Keyboard Initialized.
 
 F24:: ;Activate keys
 FileRead, key, keypressed.txt
-Tippy(emojiList[key])
+;Tippy(emojiList[key])
 if emojiList[Key]
 {
 readyEmoji := emojiList[Key]
-Send %readyEmoji%
+SendInput {Raw}%readyEmoji%
 }
 return
 
@@ -36,7 +36,7 @@ return
 
 +F21::saveArray() ;Save associations
 
-^+F21::loadArray("EmojiListSaved.txt") ;Load associations
+^+F21::loadArray() ;Load associations
 
 ~F22::Send, {Enter} ;Workaround to restore normal function of enter key
 
@@ -84,7 +84,7 @@ return fileCache
 }
 
 
-loadArray(fileName) ;Loads associations from fileName
+readArray(fileName) ;Loads associations from fileName
 {
 arrayCache := {}
 	Loop, read, %fileName%
@@ -105,7 +105,14 @@ FileDelete, EmojiListSaved.txt
 file := FileOpen("EmojiListSaved.txt", "rw","UTF-8")
 file.Write(textArray)
 file.close
-MsgBox Saved!
+MsgBox Saved to file!
+return 0
+}
+
+loadArray() ;Saves associations to EmojiListSaved.txt
+{
+emojiList := readArray("EmojiListSaved.txt")
+MsgBox Loaded from file!
 return 0
 }
 
