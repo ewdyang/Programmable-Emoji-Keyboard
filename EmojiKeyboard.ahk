@@ -24,7 +24,14 @@ FileRead, key, keypressed.txt
 if emojiList[Key]
 {
 readyEmoji := emojiList[Key]
-SendInput {Raw}%readyEmoji%
+;SendInput {Raw}%readyEmoji%
+clipStorage := ClipboardAll ;made changes to use clipboard to send text instead of raw input for speed when sending large amounts of text
+clipboard =
+clipboard = %readyEmoji%
+ClipWait, 5
+SendInput, ^v
+Sleep 100
+clipboard := clipStorage
 }
 return
 
