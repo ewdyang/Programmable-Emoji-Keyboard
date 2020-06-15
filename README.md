@@ -29,7 +29,7 @@ Shift: Saves the current text clip associations to file. The script automaticall
 
 Ctrl + Shift: Reloads the text clip associations from file.
 
-Enter/Backspace: These two keys function (mostly) normally, so you can use them while typing.
+Ctrl + Shift + Enter: Exits script to restore normal keyboard functionality.
 
 Configuration:
 The text file "ClipListSaved.txt" contains all the text associations that you have programmed while using the script.

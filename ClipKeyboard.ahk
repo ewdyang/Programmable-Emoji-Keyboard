@@ -45,6 +45,8 @@ return
 
 ^+F21::loadArray() ;Load associations
 
+^+F22::ExitApp
+
 ~F22::Send, {Enter} ;Workaround to restore normal function of enter key
 
 Tippy(tipsHere, wait:=333) ;Makes a tooltip appear by the cursor
@@ -112,14 +114,14 @@ FileDelete, ClipListSaved.txt
 file := FileOpen("ClipListSaved.txt", "rw","UTF-8")
 file.Write(textArray)
 file.close
-MsgBox Saved to file!
+;MsgBox Saved to file!
 return 0
 }
 
 loadArray() ;Saves associations to ClipListSaved.txt
 {
 clipList := readArray("ClipListSaved.txt")
-MsgBox Loaded from file!
+;MsgBox Loaded from file!
 return 0
 }
 
