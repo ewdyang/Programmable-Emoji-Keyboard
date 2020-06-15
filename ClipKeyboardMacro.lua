@@ -1,11 +1,11 @@
 -- get luamacros here: http://www.hidmacros.eu/
 -- plug in your 2nd keyboard, load this script into LUAmacros, and press the triangle PLAY button.
--- Then, press any key on that keyboard to assign logical name ('EMOJIKEYBOARDDEVICE') to macro keyboard
-lmc_assign_keyboard('EMOJIKEYBOARDDEVICE');
+-- Then, press any key on that keyboard to assign logical name ('CLIPKEYBOARDDEVICE') to macro keyboard
+lmc_assign_keyboard('CLIPKEYBOARDDEVICE');
 
 --The better solution: comment out the line above and uncomment the line below, replacing 'KEYBOARDIDREGEX' with the ID of your keyboard.
---The ID of your desired keyboard can be found by running the script once, then checking the output of LuaMacros and seeing which ID corresponded with the name 'EMOJIKEYBOARDDEVICE'
---lmc_device_set_name('EMOJIKEYBOARDDEVICE','KEYBOARDIDREGEX')
+--The ID of your desired keyboard can be found by running the script once, then checking the output of LuaMacros and seeing which ID corresponded with the name 'CLIPKEYBOARDDEVICE'
+--lmc_device_set_name('CLIPKEYBOARDDEVICE','KEYBOARDIDREGEX')
 
 lmc_print_devices()
 
@@ -126,7 +126,7 @@ local config = {
 }
 
 -- define callback for whole device
-lmc_set_handler('EMOJIKEYBOARDDEVICE', function(button, direction)
+lmc_set_handler('CLIPKEYBOARDDEVICE', function(button, direction)
 	if (direction == 0) then return end  -- ignore up
 
 	if config[button] == "ctrl" then

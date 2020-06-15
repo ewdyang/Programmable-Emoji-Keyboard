@@ -5,13 +5,13 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance force
 OnExit, ExitSave ;Label to activate when the script is ending
 
-Run, LuaMacros.exe EmojiKeyboardMacro.lua -r ;runs LuaMacros with the appropriate .lua file, auto-running the file as soon as the application loads
+Run, LuaMacros.exe ClipKeyboardMacro.lua -r ;runs LuaMacros with the appropriate .lua file, auto-running the file as soon as the application loads
 
-global emojiList := {}
+global clipList := {}
 
-emojiList := readArray("EmojiListSaved.txt") ;Loads associations from file into array 'emojiList'
+clipList := readArray("ClipListSaved.txt") ;Loads associations from file into array 'clipList'
 
-MsgBox Emoji Keyboard Initialized.
+MsgBox ClipKeyboard Initialized.
 
 ;F24 - Run key in "KeyPressed.txt"
 ;F23 - Ctrl
@@ -20,14 +20,14 @@ MsgBox Emoji Keyboard Initialized.
 
 F24:: ;Activate keys
 FileRead, key, keypressed.txt
-;Tippy(emojiList[key])
-if emojiList[Key]
+;Tippy(clipList[key])
+if clipList[Key]
 {
-readyEmoji := emojiList[Key]
-;SendInput {Raw}%readyEmoji%
+readyClip := clipList[Key]
+;SendInput {Raw}%readyClip%
 clipStorage := ClipboardAll ;made changes to use clipboard to send text instead of raw input for speed when sending large amounts of text
 clipboard =
-clipboard = %readyEmoji%
+clipboard = %readyClip%
 ClipWait, 5
 SendInput, ^v
 Sleep 100
@@ -37,8 +37,8 @@ return
 
 ^F24:: ;Program keys
 FileRead, key, keypressed.txt
-AddToEmojiList(key)
-;MsgBox % "Added: " key ": " emojiList[key]
+AddToClipList(key)
+;MsgBox % "Added: " key ": " clipList[key]
 return
 
 +F21::saveArray() ;Save associations
@@ -57,32 +57,32 @@ noTip:
 	;removes the tooltip
 return
 
-AddToEmojiList(keyAssign) ;Adds the currently highlighted text to the list of associations, assigning it to keyAssign 
+AddToClipList(keyAssign) ;Adds the currently highlighted text to the list of associations, assigning it to keyAssign 
 {
-global emojiList
+global clipList
 clipStorage := ClipboardAll
 clipboard =
 Send, ^c
 ClipWait, 0
 if ErrorLevel
 {
-    MsgBox, Adding emoji failed!
+    MsgBox, Adding clip failed!
     return
 }
-emoji = %clipboard%
+clip = %clipboard%
 ;MsgBox %clipboard%
-;MsgBox %emoji%
-emojiList[keyAssign] := emoji
+;MsgBox %clip%
+clipList[keyAssign] := clip
 clipboard := clipStorage
 clipStorage =
-emoji = 
+clip = 
 }
 
 genTextArray() ;Converts the array that holds the associations into text form for saving
 {
-global emojiList
+global clipList
 fileCache =
-For key, value in emojiList
+For key, value in clipList
 {
 	;MsgBox % key A_Tab value
 	fileCache := fileCache . key A_Tab value . "`n"
@@ -105,20 +105,20 @@ arrayCache := {}
 return arrayCache
 }
 
-saveArray() ;Saves associations to EmojiListSaved.txt
+saveArray() ;Saves associations to ClipListSaved.txt
 {
 textArray := genTextArray()
-FileDelete, EmojiListSaved.txt
-file := FileOpen("EmojiListSaved.txt", "rw","UTF-8")
+FileDelete, ClipListSaved.txt
+file := FileOpen("ClipListSaved.txt", "rw","UTF-8")
 file.Write(textArray)
 file.close
 MsgBox Saved to file!
 return 0
 }
 
-loadArray() ;Saves associations to EmojiListSaved.txt
+loadArray() ;Saves associations to ClipListSaved.txt
 {
-emojiList := readArray("EmojiListSaved.txt")
+clipList := readArray("ClipListSaved.txt")
 MsgBox Loaded from file!
 return 0
 }
